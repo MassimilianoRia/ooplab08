@@ -35,10 +35,13 @@ public class MiniGUI {
     public MiniGUI() {
         final JPanel canvas = new JPanel();
         final JPanel canvas2 = new JPanel();
-        final JButton write = new JButton("Print a random number on standard output");
-        final JTextField result = new JTextField();
-        final JLabel label = new JLabel("Result: ");
         final JPanel canvas3 = new JPanel();
+        final JButton write = new JButton("Print a random number on standard output");
+        final JLabel label = new JLabel("Result: ");
+        final JTextField result = new JTextField();
+        frame.setContentPane(canvas);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        result.setEditable(false);
         canvas.setLayout(new BorderLayout());
         canvas2.setLayout(new BoxLayout(canvas2, BoxLayout.X_AXIS));
         canvas3.setLayout(new BoxLayout(canvas3, BoxLayout.X_AXIS));
@@ -47,15 +50,15 @@ public class MiniGUI {
         canvas2.add(write);
         canvas.add(canvas2, BorderLayout.CENTER);
         canvas.add(canvas3, BorderLayout.NORTH);
-        frame.setContentPane(canvas);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * Handlers
          */
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(randomGenerator.nextInt());
+                final int number = randomGenerator.nextInt();
+                System.out.println(number);
+                result.setText(Integer.toString(number));
             }
         });
     }
